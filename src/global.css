@@ -83,19 +83,18 @@
       stroke-width: 0.1;
     }
     .menu {
-      flex-direction: row;
       width: 100%;
-      justify-content: space-around;
+      cursor: default;
+      align-items: flex-start;
     }
     .menu span,
     a,
     button {
       font-size: 20pt;
-      margin-left: 10px;
-      margin-right: 10px;
+      margin: 16px;
     }
     #toggle {
-      display: none;
+        margin: 10px;
     }
     #pause {
       transform: scale(5, 5);

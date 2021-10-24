@@ -41,9 +41,10 @@
         <span id="persist">
             <input type="checkbox" onchange="tracer.setMAX(this.checked ? 10000 : 500)" />PERSIST TRACE?
         </span>
-        <span id="graph">
-            <input type="checkbox" onchange="upperGraph.setActive(this.checked)" checked />SHOW GRAPH?
-        </span>
+        <!-- reduce lag while viewing dev tools -->
+        <!-- <span id="graph">
+            <input type="checkbox" onchange="upperGraph.setActive(this.checked)" />SHOW GRAPH?
+        </span> -->
         <span id="gravity">
             <input type="checkbox" onchange="doublePendulum.setGravity(this.checked ? 0.1 : 0)" checked />GRAVITY?
         </span>

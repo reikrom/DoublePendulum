@@ -418,7 +418,7 @@ var menu = document.querySelector(".menu");
             Math.min(tempPlot, 2 * Math.PI - tempPlot)) /
             Math.PI
       );
-      drawGraph();
+    //    drawGraph();
     }
 
     function drawTracer() {
@@ -564,3 +564,5 @@ var menu = document.querySelector(".menu");
     window.addEventListener("keyup", (e) => {
       if (e.keyCode == 32 || e.key == " ") animationToggle();
     });
+
+    
