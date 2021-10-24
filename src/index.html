@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Double Pendulum</title>
+    <meta name="title" content="Double Pendulum" />
+    <meta name="description" content="Interactive Double Pendulum Playground Using SVG" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://theabbie.github.io/DoublePendulum/" />
+    <meta property="og:title" content="Double Pendulum" />
+    <meta property="og:description" content="Interactive Double Pendulum Playground Using SVG" />
+    <meta property="og:image" content="https://theabbie.github.io/DoublePendulum/DoublePendulum.jpg" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://theabbie.github.io/DoublePendulum/" />
+    <meta property="twitter:title" content="Double Pendulum" />
+    <meta property="twitter:description" content="Interactive Double Pendulum Playground Using SVG" />
+    <meta property="twitter:image" content="https://theabbie.github.io/DoublePendulum/DoublePendulum.jpg" />
+</head>
+
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="container">
+        <polyline id="upper_graph" />
+        <circle id="base" />
+        <line id="upper_string" />
+        <circle id="upper_bob" />
+        <line id="lower_string" />
+        <circle id="lower_bob" />
+        <polyline id="tracer" />
+    </svg>
+    <div class="menu">
+        <a href="/" id="home">⌂</a>
+        <a href="https://github.com/theabbie/DoublePendulum" id="github">GITHUB</a>
+        <button id="pause">| |</button>
+        <span id="reset" onclick="refresh()">RESET</span>
+        <span id="reset">
+            <input type="checkbox" onchange="tracer.setActive(this.checked)" checked />SHOW TRACE?
+        </span>
+        <span id="persist">
+            <input type="checkbox" onchange="tracer.setMAX(this.checked ? 10000 : 500)" />PERSIST TRACE?
+        </span>
+        <span id="graph">
+            <input type="checkbox" onchange="upperGraph.setActive(this.checked)" checked />SHOW GRAPH?
+        </span>
+        <span id="gravity">
+            <input type="checkbox" onchange="doublePendulum.setGravity(this.checked ? 0.1 : 0)" checked />GRAVITY?
+        </span>
+        <span id="mass">
+            <span onclick="doublePendulum.decreaseLowerMass()">-</span>
+            <span>MASS</span>
+            <span onclick="doublePendulum.increaseLowerMass()">+</span>
+        </span>
+        <span id="share" onclick="shareConfig()">SHARE</span>
+        <span id="toggle" onclick="toggleMenu()"> ☰ </span>
+    </div>
+    <script src="./index.js" type="text/javascript"></script>
+    <!-- import global styles -->
+    <link rel="stylesheet" href="./global.css" type="text/css" />
+</body>
+
+</html>
