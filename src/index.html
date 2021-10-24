@@ -33,18 +33,17 @@
     <div class="menu">
         <a href="/" id="home">⌂</a>
         <a href="https://github.com/theabbie/DoublePendulum" id="github">GITHUB</a>
-        <button id="pause">| |</button>
+        <button id="pause">Pause</button>
         <span id="reset" onclick="refresh()">RESET</span>
         <span id="reset">
             <input type="checkbox" onchange="tracer.setActive(this.checked)" checked />SHOW TRACE?
         </span>
-        <span id="persist">
-            <input type="checkbox" onchange="tracer.setMAX(this.checked ? 10000 : 500)" />PERSIST TRACE?
-        </span>
         <span>
             <div>Trace Length: <span id="trace-length">1</span></div>
-            <input type="range" min="0" max="10000" value="1" onchange="tracer.setMAX(this.value)" />
+            <input type="range" min="100" max="10000" value="500" step="500"
+                onchange="updateTracerLength(this.value)" />
         </span>
+
         <!-- reduce lag while viewing dev tools -->
         <!-- <span id="graph">
             <input type="checkbox" onchange="upperGraph.setActive(this.checked)" />SHOW GRAPH?
@@ -55,8 +54,13 @@
         <span id="mass">
             <span onclick="doublePendulum.decreaseLowerMass()">-</span>
             <span>MASS</span>
+            <span id="mass-value">100</span>
             <span onclick="doublePendulum.increaseLowerMass()">+</span>
         </span>
+        <!-- <span>
+            
+            <input type="range" min="1" max="5" value="1" onchange="updateMass(this.value)" />
+        </span> -->
         <span id="share" onclick="shareConfig()">SHARE</span>
         <span id="toggle" onclick="toggleMenu()"> ☰ </span>
     </div>

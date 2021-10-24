@@ -11,6 +11,7 @@ var lowerBob = document.querySelector('#lower_bob');
 var tracerLine = document.querySelector('#tracer');
 var animation;
 var traceLength = document.querySelector('#trace-length');
+var massValue = document.querySelector('#mass-value');
 
 class DoublePendulum {
     constructor({
@@ -99,10 +100,13 @@ class DoublePendulum {
 
     increaseLowerMass() {
         this.m1 += 1;
+        massValue.innerHTML = this.m1;
     }
 
     decreaseLowerMass() {
+        if (this.m1 <= 1) return;
         this.m1 -= 1;
+        massValue.innerHTML = this.m1;
     }
 
     setGravity(gravity) {
@@ -446,11 +450,11 @@ animation = setInterval(animate, 10);
 function animationToggle(e) {
     if (!animation) {
         animation = setInterval(animate, 10);
-        animationToggleButton.innerHTML = '| |';
+        animationToggleButton.innerHTML = 'Pause';
     } else {
         clearInterval(animation);
         animation = null;
-        animationToggleButton.innerHTML = '>';
+        animationToggleButton.innerHTML = 'Play';
     }
 }
 
@@ -565,3 +569,16 @@ animationToggleButton.addEventListener('touchend', (e) => {
 window.addEventListener('keyup', (e) => {
     if (e.keyCode == 32 || e.key == ' ') animationToggle();
 });
+
+function updateTracerLength(value) {
+    tracer.MAX = parseInt(value);
+    traceLength.innerHTML = tracer.MAX;
+}
+
+function updateMass(value) {
+    doublePendulum.m1 = parseFloat(value);
+    massValue.innerHTML = doublePendulum.m1;
+}
+
+// TODO: fix share / save function to save everything
+traceLength.innerHTML = tracer.MAX;
