@@ -41,6 +41,10 @@
         <span id="persist">
             <input type="checkbox" onchange="tracer.setMAX(this.checked ? 10000 : 500)" />PERSIST TRACE?
         </span>
+        <span>
+            <div>Trace Length: <span id="trace-length">1</span></div>
+            <input type="range" min="0" max="10000" value="1" onchange="tracer.setMAX(this.value)" />
+        </span>
         <!-- reduce lag while viewing dev tools -->
         <!-- <span id="graph">
             <input type="checkbox" onchange="upperGraph.setActive(this.checked)" />SHOW GRAPH?
