@@ -95,3 +95,7 @@ button {
         margin: 10px;
     }
 }
+
+input[type='range'] {
+    width: 300px;
+}

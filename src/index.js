@@ -12,6 +12,9 @@ var tracerLine = document.querySelector('#tracer');
 var animation;
 var traceLength = document.querySelector('#trace-length');
 var massValue = document.querySelector('#mass-value');
+var gravityValue = document.querySelector('#gravity-value');
+var mass1Value = document.querySelector('#m0-value');
+var mass2Value = document.querySelector('#m1-value');
 
 class DoublePendulum {
     constructor({
@@ -88,25 +91,6 @@ class DoublePendulum {
 
     setLowerAcceleration(acc) {
         this.acc1 = acc;
-    }
-
-    increaseUpperMass() {
-        this.m0 += 1;
-    }
-
-    decreaseUpperMass() {
-        this.m0 -= 1;
-    }
-
-    increaseLowerMass() {
-        this.m1 += 1;
-        massValue.innerHTML = this.m1;
-    }
-
-    decreaseLowerMass() {
-        if (this.m1 <= 1) return;
-        this.m1 -= 1;
-        massValue.innerHTML = this.m1;
     }
 
     setGravity(gravity) {
@@ -355,6 +339,7 @@ function refresh() {
         g: 0.1,
     });
 
+    // rei @TODO: save menu options too
     if (window.location.hash.length > 0) {
         const query = window.location.hash.substring(1);
         try {
@@ -466,6 +451,7 @@ function toggleMenu() {
     }
 }
 
+// rei @TODO: save menu options too
 function shareConfig() {
     window.location.hash = btoa(JSON.stringify(doublePendulum));
     shareButton.innerHTML = '👆 COPY LINK !!!';
@@ -572,13 +558,30 @@ window.addEventListener('keyup', (e) => {
 
 function updateTracerLength(value) {
     tracer.MAX = parseInt(value);
-    traceLength.innerHTML = tracer.MAX;
+    renderValues();
 }
 
-function updateMass(value) {
+function updateGravity(value) {
+    doublePendulum.g = parseFloat(value);
+    renderValues();
+}
+
+function updateMass1(value) {
+    doublePendulum.m0 = parseFloat(value);
+    renderValues();
+}
+
+function updateMass2(value) {
     doublePendulum.m1 = parseFloat(value);
-    massValue.innerHTML = doublePendulum.m1;
+    renderValues();
 }
 
+function renderValues() {
+    traceLength.innerHTML = tracer.MAX;
+    mass1Value.innerHTML = doublePendulum.m0;
+    mass2Value.innerHTML = doublePendulum.m1;
+    gravityValue.innerHTML = doublePendulum.g;
+}
 // TODO: fix share / save function to save everything
-traceLength.innerHTML = tracer.MAX;
+
+renderValues();
