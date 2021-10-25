@@ -320,7 +320,7 @@ const tracer = new Tracer();
 const upperGraph = new Tracer();
 
 function refresh() {
-    const scaleWidth = 50;
+    const scaleWidth = 100;
     const scaleHeight = (100 * innerHeight) / innerWidth;
     const scale = Math.min(scaleWidth, scaleHeight);
 
