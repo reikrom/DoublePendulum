@@ -10,11 +10,17 @@ var upperBob = document.querySelector('#upper_bob');
 var lowerBob = document.querySelector('#lower_bob');
 var tracerLine = document.querySelector('#tracer');
 var animation;
-var traceLength = document.querySelector('#trace-length');
-var massValue = document.querySelector('#mass-value');
+
+var tracerLenValue = document.querySelector('#trace-length');
 var gravityValue = document.querySelector('#gravity-value');
 var mass1Value = document.querySelector('#m0-value');
 var mass2Value = document.querySelector('#m1-value');
+
+var traceInput = document.querySelector('#trace-input');
+var gravityInput = document.querySelector('#gravity-input');
+var mass1Input = document.querySelector('#m0-input');
+var mass2Input = document.querySelector('#m1-input');
+var menuIcon = document.querySelector('#menu-icon');
 
 class DoublePendulum {
     constructor({
@@ -339,15 +345,18 @@ function refresh() {
         g: 0.1,
     });
 
-    // rei @TODO: save menu options too
+    // rei @TODO: load menu options too
     if (window.location.hash.length > 0) {
         const query = window.location.hash.substring(1);
         try {
             const encoded_JSON = atob(query);
             const config = JSON.parse(encoded_JSON);
+            console.log(config, 'config');
             for (var prop in config) {
                 doublePendulum[prop] = config[prop];
             }
+            console.log(tracer, 'tracer');
+            tracer.MAX = config.tracerLen;
             doublePendulum.width = scaleWidth;
             doublePendulum.height = scaleHeight;
             doublePendulum.x0 = (config.x0 / config.width) * scaleWidth;
@@ -408,7 +417,7 @@ function drawPendulum() {
                 Math.min(tempPlot, 2 * Math.PI - tempPlot)) /
                 Math.PI
     );
-    //    drawGraph();
+    drawGraph();
 }
 
 function drawTracer() {
@@ -446,16 +455,24 @@ function animationToggle(e) {
 function toggleMenu() {
     if (menu.style.transform == 'translate(-50%, -95%)') {
         menu.style.transform = 'translate(-50%, 0%)';
+        menu.style.opacity = '1';
+        menuIcon.innerHTML = 'x ';
     } else {
         menu.style.transform = 'translate(-50%, -95%)';
+        menu.style.opacity = '0';
+        menuIcon.innerHTML = '☰';
     }
 }
 
 // rei @TODO: save menu options too
 function shareConfig() {
+    doublePendulum.tracerLen = tracer.MAX;
     window.location.hash = btoa(JSON.stringify(doublePendulum));
-    shareButton.innerHTML = '👆 COPY LINK !!!';
-    setTimeout(() => (shareButton.innerHTML = 'SHARE'), 1500);
+    const buttonText = shareButton.innerHTML;
+
+    shareButton.innerHTML =
+        '👆 Copy updated page link and share pendulum settings';
+    setTimeout(() => (shareButton.innerHTML = buttonText), 4000);
 }
 
 function handleHold(clickX, clickY) {
@@ -577,11 +594,28 @@ function updateMass2(value) {
 }
 
 function renderValues() {
-    traceLength.innerHTML = tracer.MAX;
-    mass1Value.innerHTML = doublePendulum.m0;
-    mass2Value.innerHTML = doublePendulum.m1;
-    gravityValue.innerHTML = doublePendulum.g;
+    // rei @TODO: make this more efficient
+    traceInput.value = tracer.MAX;
+    mass1Input.value = doublePendulum.m0;
+    mass2Input.value = doublePendulum.m1;
+    gravityInput.value = doublePendulum.g;
+    traceInput.labels[0].innerHTML = tracer.MAX;
+    mass1Input.labels[0].innerHTML = doublePendulum.m0;
+    mass2Input.labels[0].innerHTML = doublePendulum.m1;
+    gravityInput.labels[0].innerHTML = doublePendulum.g;
 }
-// TODO: fix share / save function to save everything
 
-renderValues();
+function docReady(fn) {
+    // see if DOM is already available
+    if (
+        document.readyState === 'complete' ||
+        document.readyState === 'interactive'
+    ) {
+        // call on next available tick
+        setTimeout(fn, 1);
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+
+docReady(renderValues());

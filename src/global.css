@@ -44,12 +44,19 @@ input[type='checkbox'] {
     align-items: center;
     font-weight: bolder;
     font-family: 'Courier New', Courier, monospace;
-    top: 20px;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     color: #909090;
     cursor: pointer;
     transition: 0.5s all;
+    list-style: none;
+    background: #00000080;
+    height: 100vh;
+    width: 100%;
+}
+.menu-item input {
+    display: block;
 }
 .menu span,
 a,
@@ -57,7 +64,6 @@ button {
     text-decoration: none;
     border: none;
     background-color: transparent;
-    margin-bottom: 5px;
     transition: 0.1s all;
     cursor: pointer;
     color: inherit;
@@ -69,8 +75,6 @@ button {
 }
 #pause {
     font-weight: bolder;
-    margin-left: 10px;
-    margin-right: 10px;
     white-space: nowrap;
 }
 @media only screen and (min-width: 768px) {
@@ -85,11 +89,12 @@ button {
         cursor: default;
         align-items: flex-start;
     }
-    .menu span,
+    .menu,
     a,
     button {
         font-size: 20pt;
-        margin: 16px;
+        margin: 0;
+        padding: 0;
     }
     #toggle {
         margin: 10px;
@@ -98,4 +103,29 @@ button {
 
 input[type='range'] {
     width: 300px;
+}
+
+#github {
+    text-decoration: underline;
+}
+
+label > span {
+    width: 16px !important;
+}
+
+.menu-item {
+    padding: 10px 10px;
+}
+
+#menu-icon {
+    position: absolute;
+    top: 0;
+    right: 2%;
+    opacity: 1;
+    color: white;
+    font-size: 50px;
+}
+
+#graph-input {
+    display: inherit;
 }
